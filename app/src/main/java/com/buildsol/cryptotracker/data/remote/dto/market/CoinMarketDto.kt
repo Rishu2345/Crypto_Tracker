@@ -21,13 +21,13 @@ data class CoinMarketDto(
     val currentPrice: Double,
 
     @SerialName("market_cap")
-    val marketCap: Long,
+    val marketCap: Double,
 
     @SerialName("market_cap_rank")
     val marketCapRank: Int,
 
     @SerialName("fully_diluted_valuation")
-    val fullyDilutedValuation: Long?,
+    val fullyDilutedValuation: Double?,
 
     @SerialName("total_volume")
     val totalVolume: Double,
