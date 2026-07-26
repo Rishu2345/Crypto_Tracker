@@ -1,5 +1,6 @@
 package com.buildsol.cryptotracker.presentation.coinList.ui
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SearchOff
 import androidx.compose.material.icons.filled.WifiOff
@@ -25,6 +27,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -35,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -43,7 +47,6 @@ import com.buildsol.cryptotracker.domain.model.CoinIndexItem
 import com.buildsol.cryptotracker.presentation.coinList.CoinListUiState
 import com.buildsol.cryptotracker.presentation.coinList.CoinListViewModel
 import com.buildsol.cryptotracker.presentation.coinList.SearchUiState
-import org.jetbrains.annotations.Async
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,6 +59,7 @@ fun CoinListScreen(
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
     val searchState by viewModel.searchState.collectAsStateWithLifecycle()
     val suggestions by viewModel.autocompleteSuggestions.collectAsStateWithLifecycle()
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     val lazyListState = rememberLazyListState()
 
@@ -75,8 +79,12 @@ fun CoinListScreen(
     }
 
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            TopAppBar(title = { Text("Crypto Tracker") })
+            TopAppBar(
+                title = { Text("Crypto Tracker") },
+                scrollBehavior = scrollBehavior
+            )
         }
     ) { innerPadding ->
         Column(
@@ -193,6 +201,10 @@ private fun SearchResultsContent(
                 items(state.results, key = { it.id }) { result ->
 
                     ListItem(
+                        modifier = Modifier
+                            .clickable { onCoinClick(result.id) }
+                            .clip(RoundedCornerShape(12.dp))
+                            .border(1.dp,MaterialTheme.colorScheme.outline,RoundedCornerShape(12.dp)),
                         leadingContent = {
                             AsyncImage(
                                 model = result.image,
@@ -204,8 +216,7 @@ private fun SearchResultsContent(
                             )
                         },
                         headlineContent = { Text(result.name) },
-                        supportingContent = { Text(result.symbol.uppercase()) },
-                        modifier = Modifier.clickable { onCoinClick(result.id) }
+                        supportingContent = { Text(result.symbol.uppercase()) }
                     )
                 }
             }

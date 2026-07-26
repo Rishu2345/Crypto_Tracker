@@ -29,6 +29,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -51,10 +52,13 @@ fun CoinDetailScreen(
     val chartState by viewModel.chartState.collectAsStateWithLifecycle()
 
     val topBarTitle = (detailState as? CoinDetailUiState.Success)?.details?.name ?: "Coin Details"
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CenterAlignedTopAppBar(
+                scrollBehavior = scrollBehavior,
                 title = { Text(topBarTitle) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {

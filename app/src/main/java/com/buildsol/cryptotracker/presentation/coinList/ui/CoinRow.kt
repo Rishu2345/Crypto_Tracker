@@ -1,6 +1,7 @@
 package com.buildsol.cryptotracker.presentation.coinList.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -36,6 +37,7 @@ fun CoinRow(
             .fillMaxWidth()
             .clip(RoundedCornerShape(12.dp))
             .background(MaterialTheme.colorScheme.surface)
+            .border(1.dp,MaterialTheme.colorScheme.outline,RoundedCornerShape(12.dp))
             .clickable { onClick(coin) }
             .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically,
