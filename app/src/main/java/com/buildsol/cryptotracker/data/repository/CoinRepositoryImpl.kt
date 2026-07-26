@@ -3,10 +3,10 @@ package com.buildsol.cryptotracker.data.repository
 import com.buildsol.cryptotracker.data.local.dao.CoinDao
 import com.buildsol.cryptotracker.data.local.database.CoinIndex
 import com.buildsol.cryptotracker.data.remote.api.CoinGeckoApi
-import com.buildsol.cryptotracker.data.remote.mapper.apiToDomain
-import com.buildsol.cryptotracker.data.remote.mapper.dbToDomain
-import com.buildsol.cryptotracker.data.remote.mapper.toDomain
-import com.buildsol.cryptotracker.data.remote.mapper.toEntity
+import com.buildsol.cryptotracker.data.mapper.apiToDomain
+import com.buildsol.cryptotracker.data.mapper.dbToDomain
+import com.buildsol.cryptotracker.data.mapper.toDomain
+import com.buildsol.cryptotracker.data.mapper.toEntity
 import com.buildsol.cryptotracker.domain.model.Coin
 import com.buildsol.cryptotracker.domain.model.CoinDetails
 import com.buildsol.cryptotracker.domain.model.CoinIndexItem

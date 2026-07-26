@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SearchOff
 import androidx.compose.material.icons.filled.WifiOff
@@ -32,13 +33,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil3.compose.AsyncImage
 import com.buildsol.cryptotracker.domain.model.CoinIndexItem
 import com.buildsol.cryptotracker.presentation.coinList.CoinListUiState
 import com.buildsol.cryptotracker.presentation.coinList.CoinListViewModel
 import com.buildsol.cryptotracker.presentation.coinList.SearchUiState
+import org.jetbrains.annotations.Async
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,11 +59,6 @@ fun CoinListScreen(
 
     val lazyListState = rememberLazyListState()
 
-    // Infinite scroll: fire loadNextPage() once the user is within the last
-    // 5 items of what's currently loaded. Reading layoutInfo via
-    // derivedStateOf (not a plain val) avoids recomposing this check on
-    // every single pixel of scroll — only when the derived boolean itself
-    // actually flips.
     val shouldLoadMore by remember {
         derivedStateOf {
             val layoutInfo = lazyListState.layoutInfo
@@ -97,9 +97,6 @@ fun CoinListScreen(
                 modifier = Modifier.padding(vertical = 12.dp)
             )
 
-            // Toggle: an active query shows search results; clearing it
-            // reverts to whatever the paginated listState already holds,
-            // untouched — no refetch, no lost scroll position.
             if (searchQuery.isNotBlank()) {
                 SearchResultsContent(
                     state = searchState,
@@ -198,11 +195,18 @@ private fun SearchResultsContent(
         is SearchUiState.Success -> {
             LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 items(state.results, key = { it.id }) { result ->
-                    // SearchCoin doesn't carry live price/change data (the
-                    // /search endpoint doesn't return market data) — tapping
-                    // navigates straight to the detail screen, which fetches
-                    // full stats itself.
+
                     ListItem(
+                        leadingContent = {
+                            AsyncImage(
+                                model = result.image,
+                                contentDescription = result.name,
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(36.dp)
+                                    .clip(CircleShape)
+                            )
+                        },
                         headlineContent = { Text(result.name) },
                         supportingContent = { Text(result.symbol.uppercase()) },
                         modifier = Modifier.clickable { onCoinClick(result.id) }

@@ -6,14 +6,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-// System font (Roboto) — matches the design plan's "don't burn time on custom
-// fonts" call. If you later add a custom font family, swap FontFamily.Default
-// here and in the tabular styles below; everything else stays the same.
+
 private val AppFontFamily = FontFamily.Default
 
-// ---------- Standard M3 type scale ----------
-// Only the roles this app actually uses are customized (titleLarge/Medium,
-// bodyMedium, labelLarge); everything else falls back to M3 defaults.
+
 val CryptoTypography = Typography(
     titleLarge = TextStyle(
         fontFamily = AppFontFamily,
@@ -36,8 +32,8 @@ val CryptoTypography = Typography(
     labelLarge = TextStyle(
         fontFamily = AppFontFamily,
         fontWeight = FontWeight.Medium,
-        fontSize = 13.sp,
-        lineHeight = 16.sp
+        fontSize = 15.sp,
+        lineHeight = 17.sp
     ),
     labelMedium = TextStyle(
         fontFamily = AppFontFamily,
@@ -84,7 +80,7 @@ val PricePercentage = TextStyle(
 val PriceStatValue = TextStyle(
     fontFamily = AppFontFamily,
     fontWeight = FontWeight.Normal,
-    fontSize = 14.sp,
+    fontSize = 20.sp,
     lineHeight = 20.sp,
     fontFeatureSettings = "tnum"
 )

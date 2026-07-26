@@ -1,4 +1,4 @@
-package com.buildsol.cryptotracker.data.remote.mapper
+package com.buildsol.cryptotracker.data.mapper
 
 import com.buildsol.cryptotracker.data.local.entity.CoinEntity
 import com.buildsol.cryptotracker.data.remote.dto.market.CoinMarketDto

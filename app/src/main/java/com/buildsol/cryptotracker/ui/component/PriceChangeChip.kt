@@ -21,15 +21,7 @@ import com.buildsol.cryptotracker.ui.theme.PricePercentage
 import com.buildsol.cryptotracker.ui.theme.priceColors
 import kotlin.math.abs
 
-/**
- * Reused identically on the list, detail, and (once wired) search screens —
- * red/green price-change logic lives here and nowhere else.
- *
- * Null-safe on purpose: some coins genuinely have a null 24h % (e.g. very
- * low-volume/newly-listed coins — confirmed from real API responses during
- * testing), so this renders a neutral "—" chip instead of crashing or
- * silently showing a fake 0.00%.
- */
+
 @Composable
 fun PriceChangeChip(percentage: Double?, modifier: Modifier = Modifier) {
     val colors = MaterialTheme.priceColors

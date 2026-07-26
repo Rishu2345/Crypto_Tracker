@@ -1,4 +1,4 @@
-package com.buildsol.cryptotracker.data.remote.mapper
+package com.buildsol.cryptotracker.data.mapper
 
 import com.buildsol.cryptotracker.data.remote.dto.search.SearchCoinDto
 import com.buildsol.cryptotracker.domain.model.SearchCoin

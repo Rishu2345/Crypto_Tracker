@@ -50,8 +50,6 @@ fun CoinDetailScreen(
     val detailState by viewModel.detailState.collectAsStateWithLifecycle()
     val chartState by viewModel.chartState.collectAsStateWithLifecycle()
 
-    // Top bar title only has a coin name once stats succeed — fall back to
-    // a neutral title otherwise rather than leaving it blank while loading.
     val topBarTitle = (detailState as? CoinDetailUiState.Success)?.details?.name ?: "Coin Details"
 
     Scaffold(
@@ -63,12 +61,9 @@ fun CoinDetailScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
-                // No elevation, background-matching — the bar should read as
-                // part of the screen, not a separate raised surface, per the
-                // "Terminal Dark" design language used everywhere else.
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background,
-                    scrolledContainerColor = MaterialTheme.colorScheme.background
+                    scrolledContainerColor = MaterialTheme.colorScheme.background,
                 )
             )
         },
