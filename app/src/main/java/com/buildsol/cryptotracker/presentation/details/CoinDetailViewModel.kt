@@ -1,4 +1,4 @@
-package com.buildsol.cryptotracker.presentation.coinDetails
+package com.buildsol.cryptotracker.presentation.details
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -17,9 +17,6 @@ class CoinDetailViewModel(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    // Pulled from nav args (e.g. NavHost route "detail/{coinId}"). Koin's
-    // viewModel injection picks this up automatically via SavedStateHandle
-    // — no manual factory/parametersOf needed for this particular value.
     private val coinId: String = checkNotNull(savedStateHandle["coinId"]) {
         "CoinDetailViewModel requires a coinId nav argument"
     }
@@ -31,10 +28,6 @@ class CoinDetailViewModel(
     val chartState: StateFlow<ChartUiState> = _chartState.asStateFlow()
 
     init {
-        // Two independent launches, not async/awaitAll — awaitAll would
-        // force us to wait for both before updating either StateFlow,
-        // which defeats the point of "stats render as soon as they're
-        // ready, chart renders separately whenever it's ready."
         loadDetails()
         loadChart()
     }

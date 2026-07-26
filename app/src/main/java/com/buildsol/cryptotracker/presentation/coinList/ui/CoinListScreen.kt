@@ -129,7 +129,7 @@ private fun PaginatedListContent(
 ) {
     when (state) {
         is CoinListUiState.Loading -> {
-            ShimmerCoinList()
+            ShimmerCoinList(12)
         }
 
         is CoinListUiState.Success -> {
@@ -167,14 +167,10 @@ private fun PaginatedListContent(
         }
 
         is CoinListUiState.Error -> {
-            // Scaffold (top bar + search bar) stays visible above this —
-            // only the list area collapses into the error state.
             ErrorContent(message = state.message, onRetry = onRetry)
         }
 
         is CoinListUiState.Empty -> {
-            // Genuinely zero coins with zero cache AND zero network data —
-            // distinct message from the search-empty case below.
             EmptyContent(
                 icon = Icons.Filled.SearchOff,
                 message = "No coins available right now."

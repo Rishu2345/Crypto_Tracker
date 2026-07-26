@@ -6,8 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.buildsol.cryptotracker.presentation.coinDetails.CoinDetailViewModel
-import com.buildsol.cryptotracker.presentation.coinDetails.ui.CoinDetailScreen
+import com.buildsol.cryptotracker.presentation.details.CoinDetailViewModel
+import com.buildsol.cryptotracker.presentation.details.ui.CoinDetailScreen
 import com.buildsol.cryptotracker.presentation.coinList.CoinListViewModel
 import com.buildsol.cryptotracker.presentation.coinList.ui.CoinListScreen
 import org.koin.compose.viewmodel.koinViewModel

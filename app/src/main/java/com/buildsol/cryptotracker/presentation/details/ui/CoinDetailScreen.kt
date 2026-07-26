@@ -1,4 +1,4 @@
-package com.buildsol.cryptotracker.presentation.coinDetails.ui
+package com.buildsol.cryptotracker.presentation.details.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,10 +34,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.buildsol.cryptotracker.domain.model.CoinDetails
-import com.buildsol.cryptotracker.presentation.coinDetails.ChartUiState
-import com.buildsol.cryptotracker.presentation.coinDetails.CoinDetailUiState
-import com.buildsol.cryptotracker.presentation.coinDetails.CoinDetailViewModel
-import com.buildsol.cryptotracker.ui.component.PriceChangeChip
+import com.buildsol.cryptotracker.presentation.details.ChartUiState
+import com.buildsol.cryptotracker.presentation.details.CoinDetailUiState
+import com.buildsol.cryptotracker.presentation.details.CoinDetailViewModel
+import com.buildsol.cryptotracker.presentation.component.PriceChangeChip
 import com.buildsol.cryptotracker.ui.theme.PriceLarge
 import com.buildsol.cryptotracker.utils.formatPrice
 

@@ -22,7 +22,7 @@ class CoinRepositoryImpl(
 ) : CoinRepository {
 
     companion object {
-        const val PAGE_SIZE = 50
+        const val PAGE_SIZE = 20
     }
 
     override suspend fun getMarket(page: Int): List<Coin> {
@@ -51,9 +51,13 @@ class CoinRepositoryImpl(
     }
 
     override suspend fun loadCoinIndex() {
-        if(coinIndex.isLoaded()) return
-        val coinIndexList = coinGeckoApi.getCoinList().map{it.toDomain()}
-        coinIndex.update(coinIndexList)
+        try {
+            if (coinIndex.isLoaded()) return
+            val coinIndexList = coinGeckoApi.getCoinList().map { it.toDomain() }
+            coinIndex.update(coinIndexList)
+        }catch(e : Exception){
+            // doing nothing
+        }
     }
 
     override fun autocomplete(query: String): List<CoinIndexItem> {

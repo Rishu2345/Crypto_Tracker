@@ -1,7 +1,6 @@
-package com.buildsol.cryptotracker.presentation.coinDetails
+package com.buildsol.cryptotracker.presentation.details
 
 import com.buildsol.cryptotracker.domain.model.CoinDetails
-import com.buildsol.cryptotracker.domain.model.MarketChart
 
 sealed interface CoinDetailUiState {
     data object Loading : CoinDetailUiState

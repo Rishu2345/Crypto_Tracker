@@ -16,7 +16,7 @@ interface CoinGeckoApi{
     suspend fun getMarketCoins(
         @Query("vs_currency") currency: String = "usd",
         @Query("order") order: String = "market_cap_desc",
-        @Query("per_page") perPage: Int = 50,
+        @Query("per_page") perPage: Int = 10,
         @Query("page") page: Int,
         @Query("sparkline") sparkline: Boolean = false,
         @Query("price_change_percentage")

@@ -1,5 +1,3 @@
-// app/src/main/java/com/buildsol/cryptotracker/data/local/dao/CoinDao.kt
-
 package com.buildsol.cryptotracker.data.local.dao
 
 import androidx.room.Dao

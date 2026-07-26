@@ -1,4 +1,4 @@
-package com.buildsol.cryptotracker.ui.component
+package com.buildsol.cryptotracker.presentation.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
