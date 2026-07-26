@@ -50,5 +50,7 @@ fun CoinDetailsDto.toDomain() = CoinDetails(
 
     genesisDate = genesis_date,
 
-    homepage = links.homepage.firstOrNull()
+    homepage = links.homepage.firstOrNull(),
+
+    lastUpdated = last_updated
 )

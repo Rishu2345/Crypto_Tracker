@@ -3,6 +3,8 @@ package com.buildsol.cryptotracker.data.repository
 import com.buildsol.cryptotracker.data.local.dao.CoinDao
 import com.buildsol.cryptotracker.data.local.database.CoinIndex
 import com.buildsol.cryptotracker.data.remote.api.CoinGeckoApi
+import com.buildsol.cryptotracker.data.remote.mapper.apiToDomain
+import com.buildsol.cryptotracker.data.remote.mapper.dbToDomain
 import com.buildsol.cryptotracker.data.remote.mapper.toDomain
 import com.buildsol.cryptotracker.data.remote.mapper.toEntity
 import com.buildsol.cryptotracker.domain.model.Coin
@@ -29,10 +31,10 @@ class CoinRepositoryImpl(
 
             coinDao.insertAll(dtoList.toEntity())
 
-            dtoList.toDomain()
+            dtoList.apiToDomain()
         } catch (e: IOException) {
             val offset = (page - 1) * PAGE_SIZE
-            coinDao.getCoinsPage(limit = PAGE_SIZE, offset = offset).toDomain()
+            coinDao.getCoinsPage(limit = PAGE_SIZE, offset = offset).dbToDomain()
         }
     }
 

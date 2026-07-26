@@ -50,6 +50,19 @@ android {
     }
 }
 
+// NEW — forces a single kotlinx-coroutines-core/android version across the
+// whole dependency graph, overriding whatever Room/Koin/lifecycle/navigation
+// would otherwise transitively pull in. This is the actual fix for the
+// debounceInternal NullPointerException: without this, Gradle's default
+// "highest version wins" resolution could still pick a version that some
+// library's inline coroutine operators weren't compiled against.
+configurations.all {
+    resolutionStrategy {
+        force("org.jetbrains.kotlinx:kotlinx-coroutines-core:${libs.versions.kotlinxCoroutines.get()}")
+        force("org.jetbrains.kotlinx:kotlinx-coroutines-android:${libs.versions.kotlinxCoroutines.get()}")
+    }
+}
+
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
@@ -71,6 +84,10 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.viewmodel.compose) // viewModel() composable helper
     implementation(libs.androidx.lifecycle.viewmodel.ktx) // ViewModel + viewModelScope for launching coroutines
+
+    // --- Coroutines (explicit — see resolutionStrategy.force above) ---
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
     // --- Navigation ---
     implementation(libs.navigation.compose) // NavHost/NavController — list -> detail screen navigation

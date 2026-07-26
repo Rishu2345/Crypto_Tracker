@@ -39,6 +39,6 @@ fun CoinEntity.toDomain() = Coin(
     priceChangePercentage24h = priceChangePercentage24h
 )
 
-fun List<CoinMarketDto>.toDomain(): List<Coin> = map { it.toDomain() }
+fun List<CoinMarketDto>.apiToDomain(): List<Coin> = map { it.toDomain() }
 fun List<CoinMarketDto>.toEntity(): List<CoinEntity> = map { it.toEntity() }
-fun List<CoinEntity>.toDomain(): List<Coin> = map { it.toDomain() }
+fun List<CoinEntity>.dbToDomain(): List<Coin> = map { it.toDomain() }

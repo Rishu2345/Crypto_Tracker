@@ -32,6 +32,12 @@ class CoinListViewModel(
 
     private var currentPage = 1
 
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
+    private val _searchState = MutableStateFlow<SearchUiState>(SearchUiState.Idle)
+    val searchState: StateFlow<SearchUiState> = _searchState.asStateFlow()
+
     // Guards against duplicate concurrent page loads from a fast-scrolling
     // LazyColumn firing loadNextPage() multiple times before the first
     // request returns. Without this, quick scrolling can trigger 3-4
@@ -131,11 +137,7 @@ class CoinListViewModel(
     }
 
     // ---------- Search ----------
-    private val _searchQuery = MutableStateFlow("")
-    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
 
-    private val _searchState = MutableStateFlow<SearchUiState>(SearchUiState.Idle)
-    val searchState: StateFlow<SearchUiState> = _searchState.asStateFlow()
 
     // Instant, local, no network cost — purely an in-memory index lookup, so
     // no debounce needed here. This is deliberately separate from the

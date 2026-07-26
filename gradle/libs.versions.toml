@@ -21,6 +21,12 @@ uiTextGoogleFonts = "1.11.4"
 turbine = "1.2.0"
 mockk = "1.14.2"
 coroutinesTest = "1.10.2"
+# NEW — explicit runtime coroutines version. Was previously left unpinned
+# and resolved transitively via Room/Koin/lifecycle/navigation, which is
+# what caused the debounceInternal NPE (inline-function ABI mismatch
+# between whatever version Gradle picked and what those libraries were
+# actually compiled against). Matches coroutinesTest for consistency.
+kotlinxCoroutines = "1.10.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -61,6 +67,9 @@ androidx-compose-ui-text-google-fonts = { group = "androidx.compose.ui", name = 
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesTest" }
+# NEW
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

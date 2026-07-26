@@ -1,5 +1,6 @@
 package com.buildsol.cryptotracker.data.remote.dto.details
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -21,5 +22,8 @@ data class CoinDetailsDto(
 
     val community_data: CommunityDataDto? = null,
     val developer_data: DeveloperDataDto? = null,
-    val public_interest_stats: PublicInterestDto? = null
+    val public_interest_stats: PublicInterestDto? = null,
+    @SerialName("last_updated")
+    val last_updated: String? = null
+
 )
